@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>腾讯云服务器使用报告</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#0f1117;--surface:#1a1d27;--surface2:#242836;--border:#2e3347;--text:#e2e4ea;--muted:#8b8fa3;--accent:#6366f1;--accent2:#818cf8;--green:#22c55e;--amber:#f59e0b;--red:#ef4444;--purple:#a855f7}
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.7;font-size:15px}
+    a{color:var(--accent2);text-decoration:none}a:hover{text-decoration:underline}
+    code{background:var(--surface2);padding:2px 6px;border-radius:4px;font-size:0.88em;color:var(--green)}
+    pre{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:16px;overflow-x:auto;font-size:13px;line-height:1.6;margin:12px 0}
+    pre code{background:none;padding:0;color:var(--text)}
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(15,17,23,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 32px}
+    nav .inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:16px;height:56px}
+    nav .logo{font-weight:700;font-size:15px}
+    nav .badge{background:var(--accent);color:#fff;font-size:11px;padding:2px 8px;border-radius:99px;font-weight:600}
+    .hero{padding:120px 32px 48px;max-width:800px;margin:0 auto;text-align:center}
+    .hero h1{font-size:36px;font-weight:700;margin:10px 0;line-height:1.2}
+    .hero h1 strong{color:var(--accent2)}
+    .hero p{color:var(--muted);font-size:16px;max-width:560px;margin:10px auto 20px}
+    .hero .meta{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;color:var(--muted);font-size:13px;margin-top:8px}
+    .container{max-width:800px;margin:0 auto;padding:0 32px 80px}
+    h2{font-size:24px;font-weight:700;margin:48px 0 18px;padding-bottom:10px;border-bottom:1px solid var(--border)}
+    h3{font-size:17px;font-weight:600;margin:24px 0 10px;color:var(--accent2)}
+    p{margin:10px 0;color:#c4c8d4}
+    ul,ol{margin:10px 0 10px 24px;color:#c4c8d4}
+    li{margin:6px 0}
+    .card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px 22px;margin:14px 0}
+    .card h4{margin-top:0;color:var(--text);font-size:15px}
+    .card p{font-size:14px;margin:6px 0}
+    .card-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0}
+    @media(max-width:600px){.card-grid{grid-template-columns:1fr}}
+    .stat-row{display:flex;gap:14px;flex-wrap:wrap;margin:14px 0}
+    .stat{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px 18px;flex:1;min-width:140px}
+    .stat .val{font-size:26px;font-weight:700;color:var(--accent2)}
+    .stat .label{font-size:12px;color:var(--muted);margin-top:4px}
+    .tag{display:inline-block;font-size:11px;font-weight:600;padding:2px 8px;border-radius:99px;margin-bottom:6px}
+    .tag-ok{background:rgba(34,197,94,0.15);color:var(--green)}
+    .tag-warn{background:rgba(245,158,11,0.15);color:var(--amber)}
+    .tag-bad{background:rgba(239,68,68,0.15);color:var(--red)}
+    .callout{border-left:3px solid var(--accent);padding:12px 16px;margin:14px 0;background:var(--surface);border-radius:0 8px 8px 0}
+    .callout.tip{border-color:var(--amber)}
+    .callout.danger{border-color:var(--red)}
+    .footer{text-align:center;padding:40px 0;color:var(--muted);font-size:13px;border-top:1px solid var(--border);margin-top:60px}
+    table{width:100%;border-collapse:collapse;margin:12px 0;font-size:14px}
+    th{text-align:left;padding:8px 12px;color:var(--muted);border-bottom:1px solid var(--border);font-weight:600}
+    td{padding:8px 12px;border-bottom:1px solid var(--border);color:#c4c8d4}
+    tr:last-child td{border-bottom:none}
+    .cmd{display:flex;align-items:center;gap:8px;margin:8px 0;flex-wrap:wrap}
+    .cmd .tag{margin:0}
+  </style>
+</head>
+<body>
+<nav>
+  <div class="inner">
+    <span class="logo">☁️ 腾讯云服务器</span>
+    <span class="badge">使用报告</span>
+  </div>
+</nav>
+
+<div class="hero">
+  <h1>腾讯云服务器 <strong>使用报告</strong></h1>
+  <p>服务器基本配置、资源状态、软件环境一手掌握</p>
+  <div class="meta">
+    <span>📅 2026-07-23</span>
+    <span>🖥️ VM-0-9-ubuntu</span>
+    <span>🌍 Ubuntu 24.04</span>
+  </div>
+</div>
+
+<div class="container">
+
+<h2>一、服务器基本信息</h2>
+<div class="stat-row">
+  <div class="stat"><div class="val">2</div><div class="label">CPU 核心数</div></div>
+  <div class="stat"><div class="val">3.6 GB</div><div class="label">内存</div></div>
+  <div class="stat"><div class="val">59 GB</div><div class="label">硬盘总容量</div></div>
+  <div class="stat"><div class="val">47 GB</div><div class="label">可用空间</div></div>
+</div>
+<div class="stat-row">
+  <div class="stat"><div class="val">19%</div><div class="label">硬盘使用率</div></div>
+  <div class="stat"><div class="val">Ubuntu 24.04</div><div class="label">操作系统</div></div>
+  <div class="stat"><div class="val">10.8.0.9</div><div class="label">内网 IP</div></div>
+</div>
+
+<h2>二、资源状态</h2>
+<h3>💾 硬盘</h3>
+<table>
+  <tr><th>挂载点</th><th>总容量</th><th>已用</th><th>可用</th><th>使用率</th></tr>
+  <tr><td>/ (根目录)</td><td>59G</td><td>11G</td><td>47G</td><td><span class="tag tag-ok">19% 良好</span></td></tr>
+</table>
+
+<h3>🧠 内存</h3>
+<table>
+  <tr><th>总内存</th><th>已用</th><th>空闲</th><th>Swap</th></tr>
+  <tr><td>3.6 GB</td><td>1.1 GB</td><td>2.4 GB 可用</td><td>1.9 GB（几乎未用）</td></tr>
+</table>
+<div class="callout tip">
+  <strong>💡 解读：</strong>内存目前很充裕（可用 2.4 GB），跑 Hermes Agent + 三个子 Agent 完全够用。
+</div>
+
+<h2>三、已安装软件</h2>
+<table>
+  <tr><th>软件</th><th>版本</th><th>说明</th><th>状态</th></tr>
+  <tr><td>Hermes Agent</td><td>v0.15.1</td><td>AI Agent 主程序</td><td><span class="tag tag-ok">✅ 已安装</span></td></tr>
+  <tr><td>tmux</td><td>3.4</td><td>终端多会话管理器</td><td><span class="tag tag-ok">✅ 已安装</span></td></tr>
+  <tr><td>Python</td><td>3.11.15</td><td>Hermes 运行环境</td><td><span class="tag tag-ok">✅ 正常</span></td></tr>
+  <tr><td>Git</td><td>系统自带</td><td>代码版本管理</td><td><span class="tag tag-ok">✅ 正常</span></td></tr>
+  <tr><td>Node.js</td><td>存在</td><td>部分工具依赖</td><td><span class="tag tag-ok">✅ 已安装</span></td></tr>
+</table>
+
+<h2>四、网络与访问</h2>
+<div class="card">
+  <h4>🌐 内网 IP</h4>
+  <p><code>10.8.0.9</code> — 服务器内部网络，外网无法直接访问</p>
+</div>
+<div class="card">
+  <h4>🔐 SSH 连接</h4>
+  <p>从你本地电脑连接服务器的方式：</p>
+  <pre><code>ssh ubuntu@你的公网IP
+# 如果用 root：
+ssh root@你的公网IP</code></pre>
+</div>
+<div class="card">
+  <h4>☁️ 腾讯云安全组</h4>
+  <p>需要在腾讯云控制台开放以下端口：</p>
+  <table>
+    <tr><th>端口</th><th>用途</th><th>建议</th></tr>
+    <tr><td>22</td><td>SSH（远程登录）</td><td><span class="tag tag-ok">开放</span></td></tr>
+    <tr><td>443</td><td>HTTPS（飞书回调等）</td><td><span class="tag tag-warn">按需开放</span></td></tr>
+    <tr><td>80</td><td>HTTP</td><td><span class="tag tag-warn">按需开放</span></td></tr>
+  </table>
+</div>
+
+<h2>五、腾讯云控制台操作指引</h2>
+<h3>5.1 找公网 IP</h3>
+<ol>
+  <li>登录 <a href="https://console.tencentcloud.com/">腾讯云控制台</a></li>
+  <li>顶部搜索「云服务器」→ 进入 CVM 列表</li>
+  <li>找到你的服务器，<strong>IP 地址</strong>列就是公网 IP</li>
+</ol>
+
+<h3>5.2 开放端口（安全组）</h3>
+<ol>
+  <li>云服务器列表 → 点击服务器名称 → 「安全组」</li>
+  <li>点击安全组名称 → 「入站规则」→ 「添加规则」</li>
+  <li>填写：类型=自定义，来源=0.0.0.0/0，端口=22，协议=TCP</li>
+  <li>保存</li>
+</ol>
+
+<h3>5.3 重启服务器</h3>
+<ol>
+  <li>云服务器列表 → 勾选服务器</li>
+  <li>顶部「重启」按钮（不要经常重启）</li>
+</ol>
+
+<h2>六、连接服务器的两种方式</h2>
+<div class="card-grid">
+  <div class="card">
+    <h4>💻 方式一：SSH 终端（推荐）</h4>
+    <p>适合：日常操作、跑命令、长期使用</p>
+    <pre><code># macOS / Linux 终端
+ssh ubuntu@你的公网IP
+
+# Windows 用 PowerShell
+ssh ubuntu@你的公网IP</code></pre>
+  </div>
+  <div class="card">
+    <h4>🌐 方式二：腾讯云「登录」按钮</h4>
+    <p>适合：偶尔看一眼、不想开终端</p>
+    <p>云服务器控制台 → 点击「登录」→ 选择「一键登录」或「密码登录」</p>
+  </div>
+</div>
+
+<h2>七、Hermes Agent 使用状态</h2>
+<table>
+  <tr><th>项目</th><th>状态</th><th>路径</th></tr>
+  <tr><td>配置文件</td><td><span class="tag tag-ok">✅ 存在</span></td><td><code>~/.hermes/config.yaml</code></td></tr>
+  <tr><td>API 配置</td><td><span class="tag tag-ok">✅ 已配置 MiniMax</span></td><td><code>MiniMax-M2.7</code></td></tr>
+  <tr><td>飞书集成</td><td><span class="tag tag-warn">⚠️ 未启用</span></td><td>需配置 App ID/Secret</td></tr>
+  <tr><td>定时任务</td><td><span class="tag tag-ok">✅ 有周记提醒</span></td><td>每周日 21:00</td></tr>
+  <tr><td>会话记录</td><td><span class="tag tag-ok">✅ 正常</span></td><td><code>~/.hermes/sessions/</code></td></tr>
+</table>
+
+<h2>八、下一步建议</h2>
+<div class="card-grid">
+  <div class="card">
+    <h4>1️⃣ 接入飞书</h4>
+    <p>在飞书开放平台创建 Bot，配置 App ID 和 Secret，实现手机消息控制服务器。参考教程第八节。</p>
+  </div>
+  <div class="card">
+    <h4>2️⃣ 搭建三 Agent 协作</h4>
+    <p>用 tmux + Hermes Profiles 启动三个常驻 Agent（指挥官、研究员、质检员），互相监督辅助。</p>
+  </div>
+  <div class="card">
+    <h4>3️⃣ 开通 HTTPS 回调</h4>
+    <p>在腾讯云安全组开放 443 端口，购买域名或用已有域名，配置飞书 Bot 回调地址。</p>
+  </div>
+  <div class="card">
+    <h4>4️⃣ 定时备份</h4>
+    <p>设置 cron 任务定期备份 <code>~/.hermes/</code> 目录到腾讯云硬盘或对象存储。</p>
+  </div>
+</div>
+
+<div class="callout">
+  <strong>📌 小结：</strong>你的服务器配置均衡（2核/3.6G内存/59G盘），跑 Hermes Agent 绑绑有余。核心限制是<strong>没有公网 IP</strong>（只有内网 10.8.0.9），飞书 Bot 回调需要另外处理。
+</div>
+
+<div class="footer">
+  腾讯云服务器使用报告 · 生成于 2026-07-23<br>
+  工具：Hermes Agent v0.15.1
+</div>
+</div>
+</body>
+</html>
