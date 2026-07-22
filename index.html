@@ -42,19 +42,18 @@
     .tag-ok{background:rgba(34,197,94,0.15);color:var(--green)}
     .tag-warn{background:rgba(245,158,11,0.15);color:var(--amber)}
     .tag-bad{background:rgba(239,68,68,0.15);color:var(--red)}
+    .tag-purple{background:rgba(168,85,247,0.15);color:var(--purple)}
     .callout{border-left:3px solid var(--accent);padding:12px 16px;margin:14px 0;background:var(--surface);border-radius:0 8px 8px 0}
     .callout.tip{border-color:var(--amber)}
     .callout.danger{border-color:var(--red)}
+    .callout.good{border-color:var(--green)}
     .footer{text-align:center;padding:40px 0;color:var(--muted);font-size:13px;border-top:1px solid var(--border);margin-top:60px}
     table{width:100%;border-collapse:collapse;margin:12px 0;font-size:14px}
     th{text-align:left;padding:8px 12px;color:var(--muted);border-bottom:1px solid var(--border);font-weight:600}
     td{padding:8px 12px;border-bottom:1px solid var(--border);color:#c4c8d4}
     tr:last-child td{border-bottom:none}
-    .verdict{background:rgba(99,102,241,0.1);border:1px solid var(--accent);border-radius:10px;padding:16px 20px;margin:16px 0}
-    .verdict h4{color:var(--accent2);margin-top:0}
     .pro{color:var(--green);font-weight:600}
     .con{color:var(--red);font-weight:600}
-    .vs-box{text-align:center;padding:8px;font-size:13px;color:var(--muted);font-weight:600}
     .arch{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px;margin:16px 0;text-align:center}
     .arch h4{color:var(--text);margin:0 0 12px}
     .arch-row{display:flex;justify-content:center;align-items:center;gap:16px;flex-wrap:wrap;margin:12px 0}
@@ -68,6 +67,13 @@
     .rescue{background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.3);border-radius:8px;padding:14px 18px;margin:10px 0}
     .rescue h4{color:var(--red);margin:0 0 8px}
     .rescue p{font-size:14px;margin:4px 0}
+    .verdict{background:rgba(99,102,241,0.1);border:1px solid var(--accent);border-radius:10px;padding:16px 20px;margin:16px 0}
+    .verdict h4{color:var(--accent2);margin-top:0}
+    .comp-row{display:flex;gap:16px;margin:14px 0;flex-wrap:wrap}
+    .comp-col{flex:1;min-width:280px;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px}
+    .comp-col h4{color:var(--accent2);margin:0 0 8px}
+    .comp-col .co{font-size:13px;font-weight:600;margin:8px 0 4px}
+    .comp-col ul{font-size:13px;margin:4px 0 4px 16px}
   </style>
 </head>
 <body>
@@ -80,7 +86,7 @@
 
 <div class="hero">
   <h1>腾讯云服务器 <strong>使用报告</strong></h1>
-  <p>服务器基本配置、资源状态、软件环境、消息平台对比、多Agent架构分析</p>
+  <p>服务器配置 · 飞书接入 · WorkBuddy对比 · 多Agent架构</p>
   <div class="meta">
     <span>📅 2026-07-23</span>
     <span>🖥️ VM-0-9-ubuntu</span>
@@ -103,195 +109,160 @@
   <div class="stat"><div class="val">10.8.0.9</div><div class="label">内网 IP</div></div>
 </div>
 
-<h2>二、资源状态</h2>
-<p>内存充裕（可用 2.4 GB），跑 Hermes + 三子 Agent 完全够用。硬盘剩余 47 GB，空间充足。</p>
-
-<h2>三、已安装软件</h2>
-<table>
-  <tr><th>软件</th><th>版本</th><th>说明</th><th>状态</th></tr>
-  <tr><td>Hermes Agent</td><td>v0.15.1</td><td>AI Agent 主程序</td><td><span class="tag tag-ok">✅ 已安装</span></td></tr>
-  <tr><td>tmux</td><td>3.4</td><td>终端多会话管理器</td><td><span class="tag tag-ok">✅ 已安装</span></td></tr>
-  <tr><td>Python</td><td>3.11.15</td><td>Hermes 运行环境</td><td><span class="tag tag-ok">✅ 正常</span></td></tr>
-</table>
-
-<h2>四、网络与访问</h2>
-<p>内网 IP <code>10.8.0.9</code>，需要腾讯云控制台找公网 IP。SSH 端口 22 已在安全组开放。</p>
-
-<h2>五、腾讯云控制台操作指引</h2>
-<h3>5.1 找公网 IP</h3>
-<p>云服务器控制台 → 顶部搜索「云服务器」→ CVM 列表 → IP 地址列</p>
-<h3>5.2 开放端口</h3>
-<p>云服务器 → 安全组 → 入站规则 → 添加规则（类型=自定义，端口=22，来源=0.0.0.0/0）</p>
-<h3>5.3 连接方式</h3>
-<pre><code># macOS / Linux / Windows PowerShell
-ssh ubuntu@你的公网IP</code></pre>
-
-<h2>六、飞书接入配置</h2>
-<p>飞书是 Hermes 原生支持的消息平台，接入后可用手机消息控制服务器。</p>
+<h2>二、飞书接入配置</h2>
+<p>飞书是 Hermes 原生支持的消息平台，接入后可用手机消息控制服务器。内网服务器使用 WebSocket 长连接，无需公网 IP。</p>
 
 <h3>准备飞书开放平台应用</h3>
 <ol>
-  <li>登录 <a href="https://open.feishu.cn/">open.feishu.cn</a></li>
-  <li>「开发者后台」→「创建企业自建应用」</li>
-  <li>填写应用名称（例：Wei AI）、描述</li>
+  <li>登录 <a href="https://open.feishu.cn/">open.feishu.cn</a> → 开发者后台 → 创建企业自建应用</li>
   <li>左侧「凭证与基础信息」→ 记下 <strong>App ID</strong> 和 <strong>App Secret</strong></li>
   <li>左侧「事件订阅」→ 勾选「使用长连接接收事件」</li>
-  <li>左侧「权限管理」→ 申请以下权限：
-    <ul>
-      <li><code>im:message:send_as_bot</code>（发消息）</li>
-      <li><code>im:message:receive_v1</code>（收消息）</li>
-    </ul>
-  </li>
+  <li>左侧「权限管理」→ 申请：<code>im:message:send_as_bot</code>、<code>im:message:receive_v1</code></li>
   <li>左侧「应用发布」→「创建版本」→「申请发布」</li>
 </ol>
 
-<h3>配置 Hermes 飞书 Bot</h3>
-<pre><code># 启动交互式配置
-hermes gateway setup
-
-# 选择 feishu，按提示填入：
-# App ID: cli_xxxxxxxx
-# App Secret: xxxxxxxxxxxxxxxx
-
-# 启动网关
-hermes gateway run</code></pre>
+<h3>配置 Hermes</h3>
+<pre><code>hermes gateway setup   # 选择 feishu，填入 App ID / Secret
+hermes gateway run     # 启动网关</code></pre>
 
 <div class="callout">
-  <strong>⚠️ 注意：</strong>服务器只有内网 IP（10.8.0.9），飞书长连接模式下<strong>不需要公网回调地址</strong>，直接用 WebSocket 与飞书服务器保持连接，穿透无压力。
+  <strong>⚠️ 注意：</strong>腾讯云服务器只有内网 IP（10.8.0.9），飞书 WebSocket 长连接模式下<strong>不需要公网回调地址</strong>，直接与飞书服务器建立连接，穿透无压力。
 </div>
 
-<h2>七、飞书接入 vs. Workbuddy 接入</h2>
-<div class="callout danger">
-  <strong>⚠️ 关于 Workbuddy：</strong>我在 Hermes 官方文档和技能库中未找到 Workbuddy 这个平台。Hermes 原生支持：飞书、Telegram、Discord、Slack、WhatsApp、Signal、Email、Matrix、WeCom、WeChat 等。如果你指的是某个特定产品，请发我官网链接，我来研究能否接入。
+<h2>三、WorkBuddy vs. Hermes：不是竞争，是互补</h2>
+
+<div class="callout good">
+  <strong>✅ 重要发现：</strong>WorkBuddy 和 Hermes 是两个完全不同定位的工具，并非竞争关系，一起使用效果更好。
 </div>
 
-<h3>已知平台对比（供你参考）</h3>
-<table>
-  <tr><th>平台</th><th>国内可用</th><th>配置难度</th><th>需要公网回调</th><th>推荐度</th></tr>
-  <tr><td>飞书</td><td><span class="tag tag-ok">✅ 直连</span></td><td>低</td><td>否（WebSocket长连接）</td><td><span class="tag tag-ok">⭐⭐⭐⭐⭐</span></td></tr>
-  <tr><td>Telegram</td><td><span class="tag tag-warn">⚠️ 需翻墙</span></td><td>低</td><td>是（Webhook）</td><td><span class="tag tag-ok">⭐⭐⭐⭐</span></td></tr>
-  <tr><td>Discord</td><td><span class="tag tag-warn">⚠️ 需翻墙</span></td><td>中</td><td>是（Webhook）</td><td><span class="tag tag-ok">⭐⭐⭐</span></td></tr>
-  <tr><td>Slack</td><td><span class="tag tag-warn">⚠️ 需翻墙</span></td><td>中</td><td>是（Webhook）</td><td><span class="tag tag-ok">⭐⭐⭐</span></td></tr>
-  <tr><td>微信（WeChat）</td><td><span class="tag tag-ok">✅ 直连</span></td><td>高（需企业认证）</td><td>是</td><td><span class="tag tag-warn">⭐⭐</span></td></tr>
-</table>
-<p style="font-size:13px;color:var(--muted)">结论：国内使用，飞书是最优选择——原生支持、无需翻墙、WebSocket直连、配置最简单。</p>
+<div class="comp-row">
+  <div class="comp-col">
+    <h4>🔵 WorkBuddy（腾讯出品）</h4>
+    <div class="co">定位</div>
+    <ul><li>本地桌面客户端（Windows / Mac）</li><li>腾讯生态深度集成</li><li>擅长本地文件操作</li></ul>
+    <div class="co">擅长</div>
+    <ul><li>操作腾讯文档、腾讯会议</li><li>本地文件批量处理</li><li>生成 PPT / 报告（本地）</li><li>企业微信 / 微信助理接入</li></ul>
+    <div class="co">局限</div>
+    <ul><li>无法 24 小时在线（依赖电脑开机）</li><li>无法连接服务器/云端工具</li><li>无法定时任务</li><li>没有多 Agent 协作框架</li></ul>
+    <div class="co">价格</div>
+    <ul><li>有免费额度，积分制</li></ul>
+  </div>
+  <div class="comp-col">
+    <h4>🟣 Hermes Agent</h4>
+    <div class="co">定位</div>
+    <ul><li>服务器端 AI Agent（云端运行）</li><li>多平台消息接入</li><li>多 Agent 协作框架</li></ul>
+    <div class="co">擅长</div>
+    <ul><li>24 小时在线（服务器常驻）</li><li>定时任务 / cron 自动化</li><li>网络搜索、网页读取</li><li>多 Agent 协作（研究员+质检员）</li><li>接飞书 / Telegram 等</li></ul>
+    <div class="co">局限</div>
+    <ul><li>无法直接操作腾讯文档（需 API）</li><li>配置有一定门槛</li></ul>
+    <div class="co">价格</div>
+    <ul><li>免费开源，API 费用自付</li></ul>
+  </div>
+</div>
 
-<h2>八、多 Agent 架构：一体三分 vs. 三足鼎立</h2>
+<h3>两者如何协作？</h3>
+<pre><code>WorkBuddy（本地电脑）          Hermes（腾讯云服务器）
+┌─────────────────┐            ┌─────────────────────┐
+│  操作腾讯文档    │ ←────────→ │  24小时监控 + 搜索   │
+│  生成 PPT       │  数据文件   │  飞书消息收发        │
+│  整理本地文件    │  任务指令   │  定时报告生成        │
+│  企业微信助理    │            │  多Agent协作质检     │
+└─────────────────┘            └─────────────────────┘</code></pre>
 
-<h3>两种方案对比</h3>
+<p><strong>实际场景</strong>：Hermes 在服务器上完成调研和报告草稿 → 通过飞书发给你 → 你在 WorkBuddy 里润色、排版、发腾讯文档。两边各做擅长的事。</p>
+
+<h3>WorkBuddy 支持的消息平台接入</h3>
+<p>WorkBuddy 支持：微信助理（推荐）、微信客服号、企微助理、QQ 机器人、<strong>飞书</strong>、钉钉</p>
+<p style="font-size:13px;color:var(--muted)">飞书两者都支持，但定位不同：WorkBuddy 用飞书接收任务指令，Hermes 用飞书作为主控制通道。</p>
+
+<h2>四、多 Agent 架构：一体三分 vs. 三足鼎立</h2>
+
 <div class="arch">
   <h4>方案 A：一个 Hermes + 三个子系统（Profile）</h4>
   <div class="arch-row">
-    <div class="arch-box accent">
-      <div class="r">主 Agent</div>
-      <div class="n">🧙 指挥官</div>
-      <div class="d">理解任务 / 派发 / 汇总</div>
-    </div>
+    <div class="arch-box accent"><div class="r">主 Agent</div><div class="n">🧙 指挥官</div><div class="d">理解任务 / 派发 / 汇总</div></div>
     <div style="color:var(--muted)">→ 派发 →</div>
-    <div class="arch-box green">
-      <div class="r">子系统</div>
-      <div class="n">🔍 研究员</div>
-      <div class="d">搜索 / 查资料</div>
-    </div>
-    <div class="arch-box amber">
-      <div class="r">子系统</div>
-      <div class="n">✅ 质检员</div>
-      <div class="d">复核 / 纠错</div>
-    </div>
+    <div class="arch-box green"><div class="r">子系统</div><div class="n">🔍 研究员</div><div class="d">搜索 / 查资料</div></div>
+    <div class="arch-box amber"><div class="r">子系统</div><div class="n">✅ 质检员</div><div class="d">复核 / 纠错</div></div>
   </div>
   <p style="font-size:13px;color:var(--muted);margin:8px 0 0">三个子系统在同一 Hermes 进程内，通过内部消息传递协作</p>
 </div>
 
 <div class="arch">
-  <h4>方案 B：三个独立 Hermes Agent（多进程）</h4>
+  <h4>方案 B：三个独立 Hermes Agent（多进程）⭐推荐</h4>
   <div class="arch-row">
-    <div class="arch-box accent">
-      <div class="r">进程 1</div>
-      <div class="n">🧙 指挥官</div>
-      <div class="d">理解任务 / 派发 / 汇总</div>
-    </div>
-    <div style="color:var(--muted)">↔ 网络 / 文件 ↔</div>
-    <div class="arch-box green">
-      <div class="r">进程 2</div>
-      <div class="n">🔍 研究员</div>
-      <div class="d">搜索 / 查资料</div>
-    </div>
-    <div class="arch-box amber">
-      <div class="r">进程 3</div>
-      <div class="n">✅ 质检员</div>
-      <div class="d">复核 / 纠错</div>
-    </div>
+    <div class="arch-box accent"><div class="r">进程 1</div><div class="n">🧙 指挥官</div><div class="d">理解任务 / 派发 / 汇总</div></div>
+    <div style="color:var(--muted)">↔ 文件/网络 ↔</div>
+    <div class="arch-box green"><div class="r">进程 2</div><div class="n">🔍 研究员</div><div class="d">搜索 / 查资料</div></div>
+    <div class="arch-box amber"><div class="r">进程 3</div><div class="n">✅ 质检员</div><div class="d">复核 / 纠错</div></div>
   </div>
-  <p style="font-size:13px;color:var(--muted);margin:8px 0 0">三个独立进程，通过 tmux / 文件 / HTTP 互相通信</p>
+  <p style="font-size:13px;color:var(--muted);margin:8px 0 0">三个独立进程，通过共享文件目录通信，可实现真正的容错互救</p>
 </div>
 
 <table>
-  <tr><th>维度</th><th>方案 A（一体三分）</th><th>方案 B（三足鼎立）</th></tr>
-  <tr><td>隔离性</td><td><span class="con">差</span> — 一个崩溃全部崩</td><td><span class="pro">好</span> — 进程独立，互不影响</td></tr>
-  <tr><td>防死机能力</td><td><span class="con">弱</span> — 主进程挂了就全挂</td><td><span class="pro">强</span> — 任意一个可被其他救活</td></tr>
-  <tr><td>资源占用</td><td><span class="pro">低</span> — 共享一个进程</td><td><span class="con">高</span> — 三个进程 × 内存</td></tr>
-  <tr><td>配置复杂度</td><td><span class="pro">低</span> — 一个安装，一个配置</td><td><span class="con">高</span> — 三个配置，三个 Profile</td></tr>
-  <tr><td>通信延迟</td><td><span class="pro">极低</span> — 内存内通信</td><td><span class="con">低</span> — 文件/网络，有毫秒延迟</td></tr>
-  <tr><td>并行能力</td><td><span class="con">受限</span> — 单进程并发有限</td><td><span class="pro">强</span> — 真正并行，独立 CPU 核</td></tr>
-  <tr><td>长期稳定性</td><td><span class="con">风险集中</span></td><td><span class="pro">容错冗余</span></td></tr>
+  <tr><th>维度</th><th>方案 A（一体三分）</th><th>方案 B（三足鼎立）⭐</th></tr>
+  <tr><td>隔离性</td><td><span class="con">差 — 一个崩溃全部崩</span></td><td><span class="pro">好 — 进程独立互不影响</span></td></tr>
+  <tr><td>防死机能力</td><td><span class="con">弱</span></td><td><span class="pro">强 — 可被其他 Agent 救活</span></td></tr>
+  <tr><td>资源占用</td><td><span class="pro">低</span></td><td><span class="con">中等（三进程）</span></td></tr>
+  <tr><td>配置复杂度</td><td><span class="pro">低</span></td><td><span class="con">中等</span></td></tr>
+  <tr><td>并行能力</td><td><span class="con">受限</span></td><td><span class="pro">真正并行</span></td></tr>
+  <tr><td>容错冗余</td><td><span class="con">风险集中</span></td><td><span class="pro">有备份</span></td></tr>
 </table>
 
-<h3>防死机互救机制（方案 B 专用）</h3>
+<h3>防死机互救机制（方案 B）</h3>
 <div class="rescue">
-  <h4>🔄 自动心跳检测 + 复活脚本</h4>
-  <p>每个 Agent 每分钟向共享文件写入心跳时间戳。</p>
-  <p>独立的「守护进程」每分钟检查：</p>
-  <pre><code># 检查心跳，3分钟无跳动则判定为死机
-if (( $(date +%s) - heartbeat_timestamp > 180 )); then
+  <h4>🔄 心跳检测 + 自动复活</h4>
+  <p>每个 Agent 每分钟向共享文件写入心跳时间戳。守护脚本检查：3分钟无心跳则判定死机，自动重启对应 tmux session。</p>
+<pre><code># 检查研究员心跳
+last=$(cat ~/.hermes/shared/heartbeat-researcher 2>/dev/null || echo 0)
+now=$(date +%s)
+if (( now - last > 180 )); then
   tmux kill-session -t researcher
   sleep 2
   tmux new-session -d -s researcher "hermes -p researcher"
-  echo "$(date +%s)" > ~/.hermes/heartbeat-researcher
+  echo "$now" > ~/.hermes/shared/heartbeat-researcher
 fi</code></pre>
 </div>
 
 <div class="rescue">
-  <h4>🔄 任务接替机制</h4>
-  <p>如果研究员崩溃：指挥官检测到研究员输出文件缺失，自动重新派发任务给备用研究员（可以是同一进程的 delegate_task）。</p>
-  <p>如果指挥官崩溃：守护进程重启指挥官，指挥官从最近的会话快照恢复（Hermes 有会话保存机制）。</p>
+  <h4>🔄 任务接替</h4>
+  <p>如果研究员崩溃：指挥官检测到研究员输出文件缺失，自动重新派发任务。<br>如果指挥官崩溃：守护进程重启指挥官，从最近会话快照恢复（Hermes 自动保存）。</p>
 </div>
 
 <div class="verdict">
-  <h4>🏆 最终推荐：方案 B（三个独立 Hermes Agent）</h4>
-  <p>你的服务器 2核/3.6G内存，跑三个 Hermes Agent 绑绑有余。</p>
-  <p>方案 A 适合「轻量快速实验」，方案 B 才能实现真正的<strong>容错互救</strong>——你提到的「防止一个Agent死机、可被救活」只有方案 B 能做到。</p>
-  <p>推荐配置：</p>
-  <ul style="margin:8px 0">
-    <li>指挥官：<code>hermes -p commander</code></li>
-    <li>研究员：<code>hermes -p researcher</code></li>
-    <li>质检员：<code>hermes -p qa</code></li>
-  </ul>
-  <p>三者通过共享文件目录 <code>~/.hermes/shared/</code> 传递任务和结果。</p>
+  <h4>🏆 推荐：方案 B（三个独立 Hermes Agent）</h4>
+  <p>你的服务器 2核/3.6G内存跑三个 Hermes Agent 绑绑有余。</p>
+  <p>你提到的「防止一个Agent死机、可被救活」<strong>只有方案 B 能做到</strong>。</p>
+  <p>启动命令：</p>
+  <pre><code>hermes -p commander   # 指挥官
+hermes -p researcher   # 研究员
+hermes -p qa           # 质检员</code></pre>
+  <p>三者通过共享目录 <code>~/.hermes/shared/</code> 传递任务和结果。</p>
 </div>
 
-<h2>九、下一步行动</h2>
+<h2>五、下一步行动路线</h2>
 <div class="card-grid">
   <div class="card">
     <h4>1️⃣ 接入飞书</h4>
-    <p>腾讯云内网服务器用 WebSocket 长连接，无需公网 IP，按第六节步骤配置。</p>
+    <p>按第二节步骤配置，WebSocket 模式无需公网 IP。</p>
   </div>
   <div class="card">
     <h4>2️⃣ 搭建三 Agent 互救系统</h4>
-    <p>用 tmux 启动三个独立 Hermes Profile，配置心跳检测 + 自动复活脚本。</p>
+    <p>用 tmux 启动三个独立 Hermes Profile，配置心跳 + 自动复活。</p>
   </div>
   <div class="card">
-    <h4>3️⃣ 共享工作目录</h4>
-    <p>创建 <code>~/.hermes/shared/</code> 目录，三个 Agent 通过读写共享文件协作。</p>
+    <h4>3️⃣ WorkBuddy + Hermes 协作</h4>
+    <p>WorkBuddy 负责腾讯文档本地操作，Hermes 负责服务器端任务和飞书消息。</p>
   </div>
   <div class="card">
-    <h4>4️⃣ Workbuddy 确认</h4>
-    <p>请发 Workbuddy 官网链接，我来研究它与 Hermes 的集成方式。</p>
+    <h4>4️⃣ 测试互救机制</h4>
+    <p>手动 kill 掉一个 Agent，验证守护脚本能否在 3 分钟内自动复活。</p>
   </div>
 </div>
 
 <div class="footer">
   腾讯云服务器使用报告 · 更新于 2026-07-23<br>
-  工具：Hermes Agent v0.15.1
+  工具：Hermes Agent v0.15.1 · WorkBuddy 对比已更新
 </div>
 </div>
 </body>
